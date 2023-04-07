@@ -102,3 +102,9 @@ On Linux you can do the following steps
 There is nothing implemented for updating the code of the Greenbone Community Edition. I will think about that, once a new version is available.
 
 The one thing you can do at the moment is [Updating and Upgrading Raspberry Pi OS](https://www.raspberrypi.com/documentation/computers/os.html#updating-and-upgrading-raspberry-pi-os).
+
+## Contribute
+
+<sup>\[[Back to Contents](#contents)\]</sup>
+
+If you want to contribute, [read this](CONTRIBUTING.md).
