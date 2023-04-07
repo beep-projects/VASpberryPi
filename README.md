@@ -23,22 +23,14 @@ The basic configuration of this project can be done in 5 minutes, while the auto
 
 Greenbone gives the following hardware requirements:
 
-Minimal:
+|                      | Minimal     | Recommended | Mine |
+| -------------------- | ----------- | ----------- | ---- |
+| CPU Cores            | 2           | 4           | 4    |
+| Random-Access Memory | 4GB         | 8GB         | 2GB  |
+| Hard Disk (free)     | 20GB        | 60GB        | 32GB |
 
-- CPU Cores: 2
-- Random-Access Memory: 4GB
-- Hard Disk: 20GB free
+The hardware that I used for this project is actually a Raspberry Pi 4 Model B Rev 1.5 with 2GB RAM and a 32GB Micro-SDXC
 
-Recommended:
-
-- CPU Cores: 4
-- Random-Access Memory: 8GB
-- Hard Disk: 60GB free
-
-The hardware that I used for this project is:
-
-- Raspberry Pi 4 Model B Rev 1.5, 2GB RAM
-- SANDISK Extreme PRO® UHS-I, Micro-SDXC, 32 GB
 
 `htop` shows that 2GB are actually not enough for **VASpberryPi**, but with some swapping the system runs fine.
 
