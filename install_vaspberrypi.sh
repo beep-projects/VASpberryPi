@@ -63,6 +63,8 @@ RASPI_OS_ID="raspios_${RASPI_OS_TYPE}_${RASPI_CPU_TYPE}"
 RPI_HOST_NAME=$( grep "^HOSTNAME=" ${FILES_FOR_PI_FOLDER}/firstrun.sh | cut -d "=" -f 2 )
 #get USERNAME for raspberry pi from firstrun.sh
 RPI_USER_NAME=$( grep "^USERNAME=" ${FILES_FOR_PI_FOLDER}/firstrun.sh | cut -d "=" -f 2 )
+#get ADMIN_DEFAULT_PASSWORD for raspberry pi from secondrun.sh
+ADMIN_DEFAULT_PASSWORD=$( grep "^ADMIN_DEFAULT_PASSWORD=" ${FILES_FOR_PI_FOLDER}/secondrun.sh | cut -d "=" -f 2 )
 
 echo "SD_CARD_PATH = ${SD_CARD_PATH}"
 echo "RPI_HOST_NAME = ${RPI_HOST_NAME}"
@@ -277,7 +279,7 @@ echo "///////////////////////////////////////////////////////////////"
 echo
 echo "               ssh ${RPI_USER_NAME}@${RPI_HOST_NAME}"
 echo "               tail -f ~/secondrun.log"
-echo "               http://${RPI_HOST_NAME}:9392/ (user: admin, password: projects)"
+echo "               http://${RPI_HOST_NAME}:9392/ (user: admin, password: ${ADMIN_DEFAULT_PASSWORD})"
 echo
 echo "///////////////////////////////////////////////////////////////"
 echo

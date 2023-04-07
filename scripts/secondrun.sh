@@ -108,7 +108,6 @@ function getSources() {
 }
 
 USERNAME=COPY_USERNAME_HERE
-PASSWORD=COPY_PASSWORD_HERE
 ADMIN_DEFAULT_PASSWORD=COPY_PASSWORD_HERE
 
 # redirect output to 'secondrun.log':
@@ -122,7 +121,7 @@ exec 1>"$HOME/secondrun.log" 2>&1
 
 CURRENT_USER=$( whoami )
 echo "groups ${CURRENT_USER}"
-groups ${CURRENT_USER}
+groups "${CURRENT_USER}"
 echo "id"
 id
 
@@ -272,7 +271,7 @@ echo "cmake $SOURCE_DIR/gvmd-$GVMD_VERSION"
 echo "Current directory: $( pwd )"
 ls -al
 
-cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
+cmake "$SOURCE_DIR/gvmd-$GVMD_VERSION" \
   -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX \
   -DCMAKE_BUILD_TYPE=Release \
   -DLOCALSTATEDIR=/var \
@@ -284,7 +283,7 @@ cmake $SOURCE_DIR/gvmd-$GVMD_VERSION \
   -DSYSTEMD_SERVICE_DIR=/lib/systemd/system \
   -DLOGROTATE_DIR=/etc/logrotate.d
 
-make -j$(nproc)
+make -"j$(nproc)"
 
 # Installing gvmd
 mkdir -p "$INSTALL_DIR/gvmd"
@@ -319,9 +318,9 @@ cmake "$SOURCE_DIR/pg-gvm-$PG_GVM_VERSION" -DCMAKE_BUILD_TYPE=Release
 make -j"$(nproc)"
 
 # Installing pg-gvm
-mkdir -p $INSTALL_DIR/pg-gvm
-make DESTDIR=$INSTALL_DIR/pg-gvm install
-sudo cp -rv $INSTALL_DIR/pg-gvm/* /
+mkdir -p "$INSTALL_DIR/pg-gvm"
+make DESTDIR="$INSTALL_DIR/pg-gvm" install
+sudo cp -rv "$INSTALL_DIR/pg-gvm/"* /
 
 echo "clean $BUILD_DIR/pg-gvm"
 rm -rf "$BUILD_DIR/pg-gvm"

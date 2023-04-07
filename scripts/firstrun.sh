@@ -74,8 +74,6 @@ sudo update-locale LANG="$LOCALE"
 
 # copy the USERNAME into secondrun.sh 
 sed -i "s/^USERNAME=.*/USERNAME=${USERNAME}/" /boot/secondrun.sh
-# copy the PASSWD into secondrun.sh 
-sed -i "s/^PASSWORD=.*/PASSWORD=${PASSWD}/" /boot/secondrun.sh
 
 # set hostname and username
 CURRENT_HOSTNAME=$( </etc/hostname tr -d " \t\n\r" )

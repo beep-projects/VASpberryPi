@@ -6,7 +6,7 @@
 
 **VASpberryPi** is a collection of scripts to setup a **Raspberry Pi** with the [Community Edition](https://greenbone.github.io/docs/latest/) of the [Greenbone OpenVAS](https://www.openvas.org/) stack. It is actually following the instructions for [Building 22.4 from Source](https://greenbone.github.io/docs/latest/22.4/source-build/index.html). To emphasize on this, the release versioning follows the versioning of the Greenbone Community Edition. Before you start to setup your **VASpberryPi**, you should read the [Background](https://greenbone.github.io/docs/latest/background.html) information of the Greenbone Community Documentation.
 
-The basic configuration of this project can be done in 5 minutes, while the automated setup will take 60 to 100 minutes. After that you will be able to log into the system via your web browser, but will have to wait additional XY minutes, until all feed data is downloaded, before you can start your first scan.
+The basic configuration of this project can be done in 5 minutes, while the automated setup will take 60 to 100 minutes. After that you will be able to log into the system via your web browser, but you will have to wait approx. additional 100 minutes, until all feed data is downloaded, before you can start your first scan. So at best you plan about 3.5h to set it all up.
 
 
 ## Contents
@@ -93,7 +93,7 @@ On Linux you can do the following steps
 
 7. The user created user is ```admin``` with password ```projects``` or whatever you configured at the beginning. 
 
-8. You can start to use your system, but befor you can start the first scans, you have to wait until the feed data is downloaded. Otherwise you will get strange error messages. You can check the status of the feed data here http://vaspberrypi:9392/feedstatus. 
+8. You can start to use your system, but before you can start the first scans, you have to wait until the feed data is downloaded. Otherwise you will get strange error messages, when you try to start a scan or task. You can check the status of the feed data here http://vaspberrypi:9392/feedstatus.
 
 ## Update
 
