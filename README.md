@@ -15,8 +15,6 @@ The basic configuration of this project can be done in 5 minutes, while the auto
 - [Directory Structure of this Project](#directory-structure-of-this-project)
 - [Install](#install)
 - [Update](#update)
-- [Dashboard Gallery](#dashboard-gallery)
-- [Details](resources/details.md)
 - [Contribute](CONTRIBUTING.md)
 
 ## Requirements
