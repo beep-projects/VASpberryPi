@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/beep-projects/VASpberryPi)](https://github.com/beep-projects/VASpberryPi/blob/main/LICENSE) [![shellcheck](https://github.com/beep-projects/VASpberryPi/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/beep-projects/VASpberryPi/actions/workflows/shellcheck.yml) [![GitHub issues](https://img.shields.io/github/issues/beep-projects/VASpberryPi)](https://github.com/beep-projects/VASpberryPi/issues) [![GitHub forks](https://img.shields.io/github/forks/beep-projects/VASpberryPi)](https://github.com/beep-projects/VASpberryPi/network) [![GitHub stars](https://img.shields.io/github/stars/beep-projects/VASpberryPi)](https://github.com/beep-projects/VASpberryPi/stargazers) ![GitHub repo size](https://img.shields.io/github/repo-size/beep-projects/VASpberryPi) [![Visitors](https://api.visitorbadge.io/api/visitors?path=beep-projects%2FVASpberryPi&label=Visitors&labelColor=%235a5a5a&countColor=%234cc71e&style=flat&labelStyle=none)](https://visitorbadge.io/status?path=beep-projects%2FVASpberryPi)
 </div>
 
-**VASpberryPi** is a collection of scripts to setup a **Raspberry Pi** with the [Community Edition](https://greenbone.github.io/docs/latest/) of the [Greenbone OpenVAS](https://www.openvas.org/) stack. It is actually following the instructions for [Building 22.4 from Source](https://greenbone.github.io/docs/latest/22.4/source-build/index.html). To emphasize on this, the release versioning follows the versioning of the Greenbone Community Edition. Before you start to setup your **VASpberryPi**, you should read the [Background](https://greenbone.github.io/docs/latest/background.html) information of the Greenbone Community Documentation.
+**VASpberryPi** is a collection of scripts to setup a **Raspberry Pi** with the [Community Edition](https://greenbone.github.io/docs/latest/) of the [Greenbone OpenVAS](https://www.openvas.org/) stack. It is actually following the instructions for [Building from Source](https://greenbone.github.io/docs/latest/22.4/source-build/index.html). The release versioning follows the versioning of the [openvas-scanner](https://github.com/greenbone/openvas-scanner/releases), because the Greenbone Community Edition does not have a single version, but each component has its own running version. Before you start to setup your **VASpberryPi**, you should read the [Background](https://greenbone.github.io/docs/latest/background.html) information of the Greenbone Community Documentation.
 
 The basic configuration of this project can be done in 5 minutes, while the automated setup will take 60 to 100 minutes. After that you will be able to log into the system via your web browser, but you will have to wait approx. additional 100 minutes, until all feed data is downloaded, before you can start your first scan. So at best you plan about 3.5h to set it all up.
 
@@ -91,7 +91,7 @@ On Linux you can do the following steps
 
 6. Open [http://vaspberrypi:9392](http://vaspberrypi:9392) in your browser. 
 
-7. The user created user is ```admin``` with password ```projects``` or whatever you configured at the beginning. 
+7. The user created is ```admin``` with password ```projects``` or whatever password you configured at the beginning. 
 
 8. You can start to use your system, but before you can start the first scans, you have to wait until the feed data is downloaded. Otherwise you will get strange error messages, when you try to start a scan or task. You can check the status of the feed data here http://vaspberrypi:9392/feedstatus.
 
@@ -99,9 +99,9 @@ On Linux you can do the following steps
 
 <sup>\[[Back to Contents](#contents)\]</sup>
 
-There is nothing implemented for updating the code of the Greenbone Community Edition. I will think about that, once a new version is available.
-
-The one thing you can do at the moment is [Updating and Upgrading Raspberry Pi OS](https://www.raspberrypi.com/documentation/computers/os.html#updating-and-upgrading-raspberry-pi-os).
+There is nothing implemented for updating the code of the Greenbone Community Edition and you have to do it manually.  
+For updating OpenVAS, you should follow [Updating to Newer Releases](https://greenbone.github.io/docs/latest/22.4/source-build/workflows.html#updating-to-newer-releases).  
+If you want to have the system running for a while, you should also follow [Updating and Upgrading Raspberry Pi OS](https://www.raspberrypi.com/documentation/computers/os.html#updating-and-upgrading-raspberry-pi-os).
 
 ## Contribute
 

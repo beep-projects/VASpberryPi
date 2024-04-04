@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 #
-# Copyright (c) 2022, The beep-projects contributors
+# Copyright (c) 2022-2024, The beep-projects contributors
 # this file originated from https://github.com/beep-projects
 # Do not remove the lines above.
 # This program is free software: you can redistribute it and/or modify
@@ -20,16 +20,20 @@
 # or pass the path of the sdcard
 # bash install_suricatapi.sh /dev/mmcblk0 ;
 
-
-# this is the last successfully tested Raspberry Pi OS release for this project
-RPI_IMAGE_URL="https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-02-22/2023-02-21-raspios-bullseye-arm64-lite.img.xz"
-
-# If you are willing to fix things, go with the latest release
-USE_LATEST_RASPI_OS=false
-
-RASPI_OS_TYPE="lite" # or "full"
-RASPI_CPU_TYPE="arm64" # or "armhf
-FILES_FOR_PI_FOLDER="scripts"
+#######################################
+# Print error message.
+# Globals:
+#   None
+# Arguments:
+#   $1 = Error message
+#   $2 = return code (optional, default 1)
+# Outputs:
+#   Prints an error message to stderr
+#######################################
+function error() {
+    printf "%s\n" "${1}" >&2 ## Send message to stderr.
+    exit "${2-1}" ## Return a code specified by $2, or 1 by default.
+}
 
 echo 
 echo "=============================================================="
@@ -38,6 +42,7 @@ echo "=============================================================="
 echo 
 echo "This script will make use of dd to flash a SD card. This has the potential to break your system."
 echo "By continuing, you confirm that you know what you are doing and that you will double check every step of this script"
+echo "Insert a SD card into this computer and"
 read -rp "press Y to continue " -n 1 -s
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -57,6 +62,15 @@ else
   SD_CARD_PATH="/dev/mmcblk0"
 fi
 
+FILES_FOR_PI_FOLDER="scripts"
+
+#RPI_IMAGE_URL="https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-02-22/2023-02-21-raspios-bullseye-arm64-lite.img.xz"
+RPI_IMAGE_URL="https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2024-03-15/2024-03-15-raspios-bookworm-arm64-lite.img.xz"
+USE_LATEST_RASPI_OS=false
+
+RASPI_OS_TYPE="lite" # or "full"
+RASPI_CPU_TYPE="arm64" # or "armhf
+
 RASPI_OS_ID="raspios_${RASPI_OS_TYPE}_${RASPI_CPU_TYPE}"
 
 #get HOSTNAME for raspberry pi from firstrun.sh
@@ -75,16 +89,15 @@ echo " check SD card path"
 echo "=============================================================="
 echo 
 
-echo "please make sure that your SD card is inserted to this computer"
-echo "press any key, when you are ready to continue ..."
-read -rn 1 -s
-echo
+#echo "please make sure that your SD card is inserted to this computer"
+#echo "press any key, when you are ready to continue ..."
+#read -rn 1 -s
+#echo
 
 DISKNAME=$( echo "${SD_CARD_PATH}" | rev | cut -d "/" -f 1 | rev )
 
 if ! lsblk | grep -q "${DISKNAME}" ; then
-  echo "FAIL: Disk with name ${DISKNAME} not found, exiting"
-  exit
+  error "FAIL: Disk with name ${DISKNAME} not found, exiting"
 fi
 
 echo "CHECK OK: Disk with name ${DISKNAME} exists"
@@ -92,8 +105,7 @@ echo "CHECK OK: Disk with name ${DISKNAME} exists"
 if [ -b "${SD_CARD_PATH}" ]; then
   echo "CHECK OK: Path ${SD_CARD_PATH} exists"
 else
-  echo "FAIL: SD card at ${SD_CARD_PATH} not found, exiting"
-  exit;
+  error "FAIL: SD card at ${SD_CARD_PATH} not found, exiting"
 fi
 
 #show available disks for final check
@@ -156,8 +168,7 @@ else
   echo "checking hash value of image file"
   HASH_OK=$( sha256sum -c "${RPI_IMAGE_HASH}" | grep "${RPI_IMAGE_XZ}: OK" )
   if [ -z "${HASH_OK}" ]; then
-    echo "hash does not match, aborting"
-    exit
+    error "hash does not match, aborting"
   else
     echo "hash is ok"
   fi
@@ -251,13 +262,17 @@ echo "cp -r ${FILES_FOR_PI_FOLDER}/* ${RPI_PATH}"
 cp -r ${FILES_FOR_PI_FOLDER}/* "${RPI_PATH}"
 echo
 
+#echo "press any key to continue..."
+#read -rn 1 -s
+#echo
+
 echo 
 echo "=============================================================="
 echo " enable hdmi_force_hotplug"
 echo "=============================================================="
 echo 
 # enable hdmi_force_hotplug in the Rapberry Pi config.txt
-# this is quite helpful if you want to connect a display for some reason to a running suricatapi. E.g. for debugging problems
+# this is quite helpful if you want to connect a display for some reason to a running VASpberryPi. E.g. for debugging problems
 echo "sed -i \"/hdmi_force_hotplug=/c\hdmi_force_hotplug=1\" \"${RPI_PATH}/config.txt\""
 sed -i "/hdmi_force_hotplug=/c\hdmi_force_hotplug=1" "${RPI_PATH}/config.txt"
 
@@ -269,10 +284,8 @@ echo
 
 echo "unmount SD card"
 sudo umount "${RPI_PATH}"
-
-echo
 echo "All work is done. Please insert the SD card into your raspberry pi"
-echo "NOTE: when starting up, your raspberry pi should reboot 4 times until all setup work is finished and SuricataPi  is up and running. Be patient!"
+echo "NOTE: when starting up, your raspberry pi should reboot 4 times until all setup work is finished and VASpberryPi  is up and running. Be patient!"
 
 echo
 echo "///////////////////////////////////////////////////////////////"
