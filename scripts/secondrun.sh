@@ -362,7 +362,7 @@ cd "$SOURCE_DIR/gsa-dist-$GSA_VERSION" || error "$SOURCE_DIR/gsa-dist-$GSA_VERSI
 # Installing gsa
 sudo mkdir -p "$INSTALL_PREFIX/share/gvm/gsad/web/"
 #sudo cp -rv "build/"* "$INSTALL_PREFIX/share/gvm/gsad/web/"
-sudo cp -rv $SOURCE_DIR/gsa-dist-$GSA_VERSION/* $INSTALL_PREFIX/share/gvm/gsad/web/
+sudo cp -rv "$SOURCE_DIR/gsa-dist-$GSA_VERSION/*" "$INSTALL_PREFIX/share/gvm/gsad/web/"
 
 # Setting the GSAd version to use
 export GSAD_VERSION=22.9.0
